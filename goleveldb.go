@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+	"github.com/syndtr/goleveldb/leveldb/util"
 	"path/filepath"
 
 	"github.com/syndtr/goleveldb/leveldb"
@@ -149,6 +150,11 @@ func (db *GoLevelDB) Stats() map[string]string {
 		}
 	}
 	return stats
+}
+
+// Manual compaction of the leveldb
+func (db *GoLevelDB) Compact(r util.Range) error {
+	return db.db.CompactRange(r)
 }
 
 // NewBatch implements DB.
