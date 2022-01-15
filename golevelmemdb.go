@@ -30,6 +30,10 @@ func NewGoLevelMemDB() *GoLevelMemDB {
 	return &GoLevelMemDB{memdb.New(comparer.DefaultComparer, math.MaxInt32)}
 }
 
+func NewGoLevelMemDBWithCapacity(capacity int) *GoLevelMemDB {
+	return &GoLevelMemDB{memdb.New(comparer.DefaultComparer, capacity)}
+}
+
 // Get implements DB.
 func (db *GoLevelMemDB) Get(key []byte) ([]byte, error) {
 	key = nonNilBytes(key)
